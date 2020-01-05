@@ -6,16 +6,16 @@ import tiiehenry.classschedule.json.ClassSchedule
 import tiiehenry.classschedule.json.ClassTime
 import java.io.File
 
-class 河南科技大学 {
-//    val url = "http://jxglxt3.haust.edu.cn/wsxk/stu_zxjg.aspx"
+class 河南科技大学(val file: File) : Craller() {
+    //    val url = "http://jxglxt3.haust.edu.cn/wsxk/stu_zxjg.aspx"
     val 显示教师职称 = false//true
-    private fun start() {
+
+    override fun start(): ClassSchedule {
 //        val doc=Jsoup.connect(url)
 //            .get()
 
         val doc = Jsoup.parse(
-            File("C:\\Users\\AnyWin\\Desktop\\河南科技大学教务网站 [网上选课--正选结果]_files","stu_zxjg_rpt.html"),
-            //保存的文件夹内的html文件,文件名是一样的,改前面的路径就行
+            file,
             "GB18030",
             "http://jxglxt1.haust.edu.cn"
         )
@@ -83,6 +83,7 @@ class 河南科技大学 {
             课程 = 课程
         )
         println(schedule)
+        return schedule
     }
 
     fun getWeekDay(day: String): Int {
@@ -103,8 +104,8 @@ class 河南科技大学 {
         @JvmStatic
         fun main(args: Array<String>) {
 //            launch(MainApplication::class.java)
-
-            河南科技大学().start()
+            //保存的文件夹内的html文件,文件名是一样的,改前面的路径就行
+            河南科技大学(File("C:\\Users\\AnyWin\\Desktop\\河南科技大学教务网站 [网上选课--正选结果]_files", "stu_zxjg_rpt.html")).start()
         }
     }
 
