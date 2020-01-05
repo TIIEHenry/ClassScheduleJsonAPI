@@ -50,7 +50,7 @@ class 河南科技大学 {
                     val timeTextWithoutWeek = timeText.substringAfter(" ")
                     val 节次 = timeTextWithoutWeek.substringBefore("节")
                     val 周次 = timeTextWithoutWeek.substringAfter("[").substringBefore("周")
-                    val 地点 = eachScheduleText.substringAfter("/")
+                    val 地点 = if (eachScheduleText.contains("/")) eachScheduleText.substringAfter("/") else ""
                     上课安排.add(
                         ClassTime(
                             周次 = mutableListOf(周次),
