@@ -3,6 +3,7 @@ package tiiehenry.classschedule.json
 import com.google.gson.Gson
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
+import com.google.gson.JsonSyntaxException
 import com.google.gson.stream.JsonReader
 import java.io.StringReader
 
@@ -29,11 +30,20 @@ class ClassSchedule(
         }
     }
 
-  /*  override fun toString(): String {
-        return toJsonObject().toString()
-    }*/
+    /*  override fun toString(): String {
+          return toJsonObject().toString()
+      }*/
     override fun toString(): String {
         return Gson().toJson(this)
+    }
+
+    companion object {
+
+        @Throws(JsonSyntaxException::class)
+        fun fromJsonText(text: String): ClassSchedule {
+            val gson = Gson()
+            return gson.fromJson<ClassSchedule>(text, ClassSchedule::class.java)
+        }
     }
 
 
