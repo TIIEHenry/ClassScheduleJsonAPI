@@ -1,4 +1,4 @@
-package tiiehenry.classschedule.crawller
+package tiiehenry.classschedule.crawler
 
 import org.jsoup.Jsoup
 import tiiehenry.classschedule.json.ClassInfo
@@ -6,7 +6,7 @@ import tiiehenry.classschedule.json.ClassSchedule
 import tiiehenry.classschedule.json.ClassTime
 import java.io.File
 
-class 河南科技大学(val file: File) : Craller() {
+class 河南科技大学(val file: File) : Crawler() {
     //    val url = "http://jxglxt3.haust.edu.cn/wsxk/stu_zxjg.aspx"
     val 显示教师职称 = false//true
 
@@ -46,14 +46,15 @@ class 河南科技大学(val file: File) : Craller() {
                 val 上课安排 = mutableListOf<ClassTime>()
                 scheduleTextList.forEach { eachScheduleText ->
                     val timeText = eachScheduleText.substringBefore("/")
-                    val 星期 = getWeekDay(timeText.substringBefore(" "))
+                    val 星期 = week2Day(timeText.substringBefore(" "))
                     val timeTextWithoutWeek = timeText.substringAfter(" ")
                     val 节次 = timeTextWithoutWeek.substringBefore("节")
                     val 周次 = timeTextWithoutWeek.substringAfter("[").substringBefore("周")
                     val 地点 = if (eachScheduleText.contains("/")) eachScheduleText.substringAfter("/") else ""
+
                     上课安排.add(
                         ClassTime(
-                            周次 = mutableListOf(周次),
+                            周次 = 周次.split(",").toMutableList(),
                             星期 = mutableListOf(星期),
                             节次 = mutableListOf(节次),
                             地点 = 地点,
@@ -86,7 +87,7 @@ class 河南科技大学(val file: File) : Craller() {
         return schedule
     }
 
-    fun getWeekDay(day: String): Int {
+    fun week2Day(day: String): Int {
         return when (day) {
             "一" -> 1
             "二" -> 2

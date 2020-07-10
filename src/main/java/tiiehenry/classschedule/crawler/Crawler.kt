@@ -1,11 +1,11 @@
-package tiiehenry.classschedule.crawller
+package tiiehenry.classschedule.crawler
 
 import tiiehenry.classschedule.json.ClassSchedule
 
-abstract class Craller {
+abstract class Crawler {
     abstract fun start(): ClassSchedule
 
     companion object {
-        val carllerList = mutableListOf<Craller>()
+        val crawlerList = mutableListOf<Crawler>()
     }
 }

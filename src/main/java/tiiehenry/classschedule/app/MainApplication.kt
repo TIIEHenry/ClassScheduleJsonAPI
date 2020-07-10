@@ -10,8 +10,7 @@ import javafx.scene.control.Button
 import javafx.scene.control.TextField
 import javafx.stage.Stage
 import javafx.stage.StageStyle
-import tiiehenry.classschedule.crawller.河南科技大学
-import tiiehenry.classschedule.json.ClassSchedule
+import tiiehenry.classschedule.crawler.河南科技大学
 import javax.swing.filechooser.FileSystemView
 import java.io.File
 
@@ -52,7 +51,7 @@ class MainApplication : Application() {
             val cs = 河南科技大学(
                 File(
                     desktopDir,
-                    "河南科技大学教务网站 [网上选课--正选结果]_files/stu_zxjg_rpt.html"
+                    "stu_zxjg_rpt.html"
                 )
             ).start()
             editText.text = cs.toString()
@@ -65,7 +64,7 @@ class MainApplication : Application() {
     companion object {
 
         @JvmStatic
-        fun main(args: Array<String>) {
+        fun main(args: Array<String>?) {
             launch(MainApplication::class.java)
         }
     }
