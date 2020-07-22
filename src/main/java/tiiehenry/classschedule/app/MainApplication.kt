@@ -51,7 +51,7 @@ class MainApplication : Application() {
             val cs = 河南科技大学(
                 File(
                     desktopDir,
-                    "stu_zxjg_rpt.html"
+                    "正选结果.html"
                 )
             ).start()
             editText.text = cs.toString()
